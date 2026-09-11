@@ -373,7 +373,7 @@ class CineStreamApp {
         const isBookmarked = Storage.isInMyList(item.id, type);
 
         return `
-            <div class="media-card" data-id="${item.id}" data-type="${type}">
+            <div class="media-card" data-id="${item.id}" data-type="${type}" tabindex="0" role="button" aria-label="${this.escapeHtml(title)}">
                 <button class="card-bookmark-btn ${isBookmarked ? 'active' : ''}" title="Save to My List" data-id="${item.id}">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="${isBookmarked ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2">
                         <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
@@ -398,15 +398,18 @@ class CineStreamApp {
     }
 
     bindCardEvents(container) {
-        // Click card -> Open Detail Modal
+        // Click/Enter on card -> Open Detail Modal
         container.querySelectorAll('.media-card').forEach(card => {
-            card.addEventListener('click', (e) => {
-                // If clicked bookmark button, don't trigger modal
+            const openDetail = (e) => {
                 if (e.target.closest('.card-bookmark-btn')) return;
-
-                const id = card.dataset.id;
+                const id   = card.dataset.id;
                 const type = card.dataset.type;
                 this.openDetailModal(type, id);
+            };
+            card.addEventListener('click', openDetail);
+            // Also handle Enter key directly on the card (for D-pad select)
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') { e.preventDefault(); openDetail(e); }
             });
         });
 
@@ -516,12 +519,14 @@ class CineStreamApp {
             document.getElementById('close-detail-btn')?.addEventListener('click', () => {
                 modal.classList.add('hidden');
                 document.body.style.overflow = '';
+                this.nav.refocus();
             });
 
             modal.onclick = (e) => {
                 if (e.target === modal) {
                     modal.classList.add('hidden');
                     document.body.style.overflow = '';
+                    this.nav.refocus();
                 }
             };
 

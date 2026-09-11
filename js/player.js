@@ -63,9 +63,17 @@ import { API } from './api.js';
 // Servers ordered by cleanliness (fewest ads first)
 export const SERVERS = [
     {
-        id: 'autoembed',
-        name: 'AutoEmbed (Clean)',
+        id: 'vidsrcto',
+        name: 'VidSrc.to',
         badge: 'Recommended',
+        hasSubs: true,
+        getMovieUrl: (id) => `https://vidsrc.to/embed/movie/${id}`,
+        getTvUrl:    (id, s, e) => `https://vidsrc.to/embed/tv/${id}/${s}/${e}`
+    },
+    {
+        id: 'autoembed',
+        name: 'AutoEmbed',
+        badge: 'Clean',
         hasSubs: true,
         getMovieUrl: (id) => `https://autoembed.cc/movie/tmdb/${id}`,
         getTvUrl:    (id, s, e) => `https://autoembed.cc/tv/tmdb/${id}-${s}-${e}`
@@ -85,14 +93,6 @@ export const SERVERS = [
         hasSubs: true,
         getMovieUrl: (id) => `https://www.embed3.me/embed/movie/${id}`,
         getTvUrl:    (id, s, e) => `https://www.embed3.me/embed/tv/${id}/${s}/${e}`
-    },
-    {
-        id: 'vidsrcto',
-        name: 'VidSrc.to',
-        badge: 'CC',
-        hasSubs: true,
-        getMovieUrl: (id) => `https://vidsrc.to/embed/movie/${id}`,
-        getTvUrl:    (id, s, e) => `https://vidsrc.to/embed/tv/${id}/${s}/${e}`
     },
     {
         id: 'multiembed',
