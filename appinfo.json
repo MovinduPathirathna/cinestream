@@ -1,0 +1,23 @@
+{
+  "id": "com.cinestream.app",
+  "version": "1.0.0",
+  "vendor": "CineStream",
+  "type": "web",
+  "main": "index.html",
+  "title": "CineStream",
+  "icon": "assets/icon.png",
+  "largeIcon": "assets/icon_large.png",
+  "bgColor": "#0a0a0f",
+  "iconColor": "#e50914",
+  "splashBackground": "#0a0a0f",
+  "transparent": false,
+  "resolution": "1920x1080",
+  "usePrerendering": false,
+  "handlesRelaunch": false,
+  "disableBackHistoryAPI": false,
+  "allowVideoCapture": false,
+  "keyFilterTable": {
+    "back": true,
+    "exit": true
+  }
+}
