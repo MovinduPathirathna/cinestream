@@ -972,3 +972,61 @@ body {
         border-radius: 0;
     }
 }
+
+/* ==========================================================================
+   Ad-Shield CSS — Nuke breakthrough popup/overlay ads
+   ========================================================================== */
+
+/* Hide any DIRECT child iframe of <body> that isn't our app */
+body > iframe:not([id="player-iframe"]) {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    opacity: 0 !important;
+}
+
+/* Collapse suspicious fixed-position overlays appended directly to body */
+body > div[style*="z-index: 9"],
+body > div[style*="z-index:9"] {
+    display: none !important;
+}
+
+/* Ad-shield click layer — full-area shield before user interacts */
+.ad-shield-click-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.55);
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.ad-shield-click-banner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(229, 9, 20, 0.15);
+    border: 1px solid rgba(229, 9, 20, 0.4);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 30px rgba(229, 9, 20, 0.3);
+}
+
+.ad-shield-click-banner kbd {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 0.85rem;
+    font-family: monospace;
+}
+

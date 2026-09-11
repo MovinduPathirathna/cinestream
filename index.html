@@ -6,6 +6,30 @@
     <title>CineStream - Watch Movies & TV Shows Online in HD</title>
     <meta name="description" content="Stream thousands of trending movies and TV shows online in max resolution with multi-language subtitles and ad-blocking protection.">
     <meta name="theme-color" content="#141414">
+    <!-- Early Popup Killer: runs before any iframe content can open windows -->
+    <script>
+        (function() {
+            // Block all window.open calls (popup ads)
+            window.open = function() { return null; };
+            // Block any navigation to ad URLs via link clicks
+            document.addEventListener('click', function(e) {
+                var el = e.target.closest('a[href]');
+                if (el) {
+                    var href = el.getAttribute('href') || '';
+                    // Only allow same-page hash links and explicit user nav
+                    if (href.startsWith('http') && el.target === '_blank') {
+                        var adDomains = ['doubleclick', 'googlesyndication', 'adnxs', 'popads', 'popcash',
+                                         'exoclick', 'adsterra', 'propellerads', 'trafficjunky'];
+                        if (adDomains.some(function(d) { return href.indexOf(d) !== -1; })) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            return false;
+                        }
+                    }
+                }
+            }, true);
+        })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
