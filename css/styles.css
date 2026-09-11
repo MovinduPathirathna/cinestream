@@ -64,30 +64,19 @@ body {
     background: var(--primary-red);
 }
 
-/* ── D-Pad TV Remote Focus Styles ──────────────────────────────────────────── */
-
-/* Suppress default browser focus ring — we control it entirely */
-:focus { outline: none; }
-:focus-visible { outline: none; }
-
-/* Base focus ring for nav buttons, server pills, etc. */
-.focused {
+/* D-Pad Spatial Navigation Focus Ring */
+.focused, :focus-visible {
     outline: 3px solid var(--primary-red) !important;
     outline-offset: 3px !important;
-    box-shadow: 0 0 20px rgba(229, 9, 20, 0.8), 0 0 40px rgba(229, 9, 20, 0.3) !important;
+    box-shadow: 0 0 25px rgba(229, 9, 20, 0.9) !important;
+    transform: scale(1.06) !important;
     z-index: 50 !important;
-    position: relative;
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast) !important;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), outline var(--transition-fast) !important;
 }
 
-/* Media card: bigger lift + glow effect */
 .media-card.focused {
-    outline: 3px solid var(--primary-red) !important;
-    outline-offset: 3px !important;
-    transform: scale(1.12) translateY(-8px) !important;
-    box-shadow: 0 16px 40px rgba(0,0,0,0.7), 0 0 30px rgba(229, 9, 20, 0.9) !important;
-    z-index: 50 !important;
-    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+    transform: scale(1.1) translateY(-6px) !important;
+    box-shadow: var(--shadow-card), 0 0 25px rgba(229, 9, 20, 0.8) !important;
 }
 
 .media-card.focused .media-card-overlay {
@@ -98,8 +87,6 @@ body {
     opacity: 1 !important;
     transform: translate(-50%, -50%) scale(1) !important;
 }
-
-
 
 /* Global Utility Classes */
 .hidden {
